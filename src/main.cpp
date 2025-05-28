@@ -347,18 +347,16 @@ int main() {
     inventory.Init();
     Music Unknown = LoadMusicStream("songs/Unknown");
     Music closeToHome = LoadMusicStream("songs/closeToHome.mp3");
-    Music CurrentMusic = LoadMusicStream("songs/closeToHome.mp3");
-    PlayMusicStream(CurrentMusic);
+    PlayMusicStream(closeToHome);
     while (!WindowShouldClose()) {
-        UpdateMusicStream(CurrentMusic);
+        UpdateMusicStream(Unknown);
+        UpdateMusicStream(closeToHome);
         BeginDrawing();
         drawWorld(grass, WIDTH, HEIGHT, camx, camy);
         Player.draw(WIDTH / 2, HEIGHT / 2);
         rock.draw(camx, camy, WIDTH, HEIGHT);
         rock.collide(camx, camy, WIDTH, HEIGHT);
         hotbar.draw();
-        if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_A) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_D)) CurrentMusic = Unknown;
-        if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_A) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_D)) CurrentMusic = closeToHome;
         if (rock.Broken()) {
             hotbar.add(0, 1, 1);
             inventory.add(0, 0, 1, 1);
@@ -380,7 +378,6 @@ int main() {
     rock.Unload();
     inventory.Unload();
     UnloadTexture(grass);
-    UnloadMusicStream(CurrentMusic);
     UnloadMusicStream(Unknown);
     UnloadMusicStream(closeToHome);
     CloseWindow();
