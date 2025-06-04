@@ -233,8 +233,10 @@ typedef struct Interactible {
     Texture2D selectedImage;
     int x, y;
     int health = 3;
+    Sound hitSound;
     private:
         bool inffix = false;
+        bool infhit1 = false, infhit2 = false;
         Texture2D break1 = LoadTexture("images/break1.png");
         Texture2D break2 = LoadTexture("images/break2.png");
     public:
@@ -249,23 +251,43 @@ typedef struct Interactible {
             }
             if (health == 2) {
                 DrawTexture(break1, x + camx, y + camy - 10, WHITE);
+                if (!infhit1) {
+                    PlaySound(hitSound);
+                    infhit1 = true;
+                }
             }
             if (health == 1) {
                 DrawTexture(break2, x + camx, y + camy - 10, WHITE);
+                if (!infhit2) {
+                    PlaySound(hitSound);
+                    infhit2 = true;
+                }
             }
             if (health == 0) {
                 mined = true;
+                infhit1 = false;
+                infhit2 = false;
             }
         } else if (mined == false) {
             DrawTexture(image, x + camx, y + camy, WHITE);
             if (health == 2) {
                 DrawTexture(break1, x + camx, y + camy - 10, WHITE);
+                if (!infhit1) {
+                    PlaySound(hitSound);
+                    infhit1 = true;
+                }
             }
             if (health == 1) {
                 DrawTexture(break2, x + camx, y + camy - 10, WHITE);
+                if (!infhit2) {
+                    PlaySound(hitSound);
+                    infhit2 = true;
+                }
             }
             if (health == 0) {
                 mined = true;
+                infhit1 = false;
+                infhit2 = false;
             }
         }
     }
@@ -345,8 +367,10 @@ int main() {
     bool invetoryOpen = false;
     Inventory inventory(5, 4);
     inventory.Init();
-    Music Unknown = LoadMusicStream("songs/Unknown");
+    Music Unknown = LoadMusicStream("songs/Unknown.mp3");
     Music closeToHome = LoadMusicStream("songs/closeToHome.mp3");
+    Sound hit = LoadSound("sounds/hit.mp3");
+    rock.hitSound = hit;
     PlayMusicStream(closeToHome);
     while (!WindowShouldClose()) {
         UpdateMusicStream(Unknown);
@@ -380,6 +404,7 @@ int main() {
     UnloadTexture(grass);
     UnloadMusicStream(Unknown);
     UnloadMusicStream(closeToHome);
+    UnloadSound(hit);
     CloseWindow();
     return 0;
 }
