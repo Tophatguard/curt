@@ -2,10 +2,10 @@
 _phony: clean always game run
 
 always:
-	mkdir build
+	mkdir -p build
 
 game: src/main.cpp
-	g++ src/main.cpp -lraylib -o build/game
+	g++ -g -I src/include src/main.cpp src/include/*/*.cpp -lraylib -o build/game
 
 run: build/game
 	./build/game
