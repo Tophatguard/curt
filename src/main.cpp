@@ -67,7 +67,7 @@ int main() {
             }
             Hotbar.draw();
             Input();
-            if (GetFPS() <= 100) {
+            if (GetFPS() <= 40) {
                 DrawFPS(0, 0);
             }
             ss << "x: " << camera.x << "; y: " << camera.y << ";";
