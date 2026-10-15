@@ -52,7 +52,7 @@ void Initialize() {
     Inventory.clear();
 
     Logger.log("Initializing Menu...");
-    // TODO: go to bed and then come back and write the initialization code please.
+    menu Menu();
 }
 
 int main() {
