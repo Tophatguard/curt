@@ -4,6 +4,7 @@
 #include "../window/window.hpp"
 #include "../global/assets.hpp"
 #include <raylib.h>
+#include <iostream>
 using namespace std;
 
 Block::Block(Texture2D image, Texture2D selectedImage) {
@@ -62,6 +63,7 @@ void Block::draw() {
             }
         }
         if (health == 0) {
+            destroy();
             mined = true;
             infhit1 = false;
             infhit2 = false;
@@ -83,7 +85,7 @@ void Block::draw() {
             }
         }
         if (health == 0) {
-            this->destroy();
+            destroy();
             mined = true;
             infhit1 = false;
             infhit2 = false;
@@ -92,6 +94,7 @@ void Block::draw() {
 }
 
 void Block::destroy() {
+    cout << "destroying block" << endl;
     // void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void;
     Hotbar.add(0, 1, 1);
 }

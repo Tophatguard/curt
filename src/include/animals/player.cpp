@@ -1,5 +1,6 @@
 #include "player.hpp"
 #include "../text/text.hpp"
+#include <iostream>
 using namespace std;
 
 
@@ -70,6 +71,7 @@ void Hotbar::draw() {
     for (int i = 0; i < size; i++) {
         DrawTexture(image, image.width * i, 0, WHITE);
         if (getItemIDInSlot(i) == 1) {
+            cout << "drawing rock in slot " << i << endl;
             DrawTexture(rockImage, image.width * i, 0, WHITE);
             ss << getItemAmount(i);
             DrawOutlinedText(comic_sans, ss.str().c_str(), image.width * i, 0, 20, WHITE, 1, BLACK);
@@ -92,6 +94,7 @@ void Hotbar::draw() {
         }
     }
     if (getItemIDInSlot(selectedSlot) == 1) {
+        TraceLog(LOG_INFO, "Drawing ze rock");
         // errerrrrerer i'm sans the skeleton
         DrawOutlinedText(comic_sans, "Rock", 5, 32, 20, WHITE, 1, BLACK);
     }

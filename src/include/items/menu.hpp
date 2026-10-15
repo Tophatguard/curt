@@ -5,10 +5,11 @@
 class menu {
     public:
         int x, y, width, height;
-        Texture2D topLeftCorner;
-        Texture2D topRightCorner;
-        Texture2D bottomLeftCorner;
-        Texture2D bottomRightCorner;
-        menu(int x, int y, int width, int height, Texture2D tlc, Texture2D trc, Texture2D blc, Texture2D brc) : x(x), y(y), width(width), height(height), topRightCorner(trc), topLeftCorner(tlc), bottomLeftCorner(blc), bottomRightCorner(brc) {}
-        void Draw();
+        Texture2D cornerTexture;
+        Texture2D sideTexture;
+        Texture2D centerTexture;
+        Texture2D sideYTexture;
+        bool destroyed = false;
+        menu(int x, int y, int width, int height, Texture2D corner, Texture2D side, Texture2D sideY, Texture2D center) : x(x), y(y), width(width), height(height), cornerTexture(corner), sideTexture(side), centerTexture(center), sideYTexture(sideY) {}
+        void Draw(float x, float y, int width, int height);
 };
