@@ -5,6 +5,7 @@
 #include "include/logger/logger.hpp"
 #include "include/world/generation.hpp"
 #include "include/world/world.hpp"
+#include "include/items/menu.hpp"
 #include <cstdlib>
 #include <ctime>
 #include <sstream>
@@ -51,6 +52,7 @@ void Initialize() {
     Inventory.clear();
 
     Logger.log("Initializing Menu...");
+    menu Menu();
 }
 
 int main() {
