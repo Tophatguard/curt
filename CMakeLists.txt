@@ -22,6 +22,10 @@ file(GLOB_RECURSE SRC_FILES
 
 add_executable(curt ${SRC_FILES})
 
+if(WIN32)
+    target_link_options(curt PRIVATE "-static-libgcc" "-static-libstdc++" "-static")
+endif()
+
 target_include_directories(curt PRIVATE src/include)
 target_link_libraries(curt PRIVATE raylib)
 
