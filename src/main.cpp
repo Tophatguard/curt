@@ -6,6 +6,8 @@
 #include "include/world/generation.hpp"
 #include "include/world/world.hpp"
 #include "include/items/menu.hpp"
+#include "include/objects/sprite.hpp"
+#include "include/items/menu.hpp"
 #include <cstdlib>
 #include <ctime>
 #include <sstream>
@@ -24,6 +26,8 @@ void Input() {
     }
     Player.move(camera.x, camera.y);
 }
+
+// hehehhah
 
 void Initialize() {
     Logger.log("Initializing Window...");
@@ -51,14 +55,15 @@ void Initialize() {
     Inventory.init(5, 4);
     Inventory.clear();
 
-    Logger.log("Initializing Menu...");
-    menu Menu();
+    Logger.log("Changing Mouse...");
+    HideCursor();
 }
 
 int main() {
     {
         Initialize();
         stringstream ss;
+        Texture2D Cursor = LoadTexture("images/global/cursor/cursor.png");
         while (!WindowShouldClose()) {
             Generation.generationUpdate();
             //UpdateMusicStream(Unknown);
@@ -69,15 +74,15 @@ int main() {
                 World.Blocks[i]->draw();
                 World.Blocks[i]->collide(camera.x, camera.y, Window.WIDTH, Window.HEIGHT);
             }
-            Hotbar.draw();
             Input();
+            Sprite sprite;
             if (GetFPS() <= 40) {
                 DrawFPS(0, 0);
             }
-            ss << "x: " << camera.x << "; y: " << camera.y << ";";
-            DrawText(ss.str().c_str(), 0, 0, 25, WHITE);
-            ss.str("");
-            ss.clear();
+            Sprites.draw();
+            Hotbar.draw();
+            Menus.DrawAll();
+            DrawTexture(Cursor, GetMouseX(), GetMouseY(), WHITE);
             ClearBackground(GREEN);
             EndDrawing();
         }

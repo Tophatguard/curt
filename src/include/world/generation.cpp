@@ -4,6 +4,7 @@
 #include "../window/window.hpp"
 #include "../animals/player.hpp"
 #include "../global/camera.hpp"
+#include "../objects/sprite.hpp"
 #include <raylib.h>
 using namespace std;
 

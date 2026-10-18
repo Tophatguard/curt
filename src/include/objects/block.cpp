@@ -1,4 +1,5 @@
 #include "block.hpp"
+#include "../text/text.hpp"
 #include "../animals/player.hpp"
 #include "../global/camera.hpp"
 #include "../window/window.hpp"
@@ -6,15 +7,6 @@
 #include <raylib.h>
 #include <iostream>
 using namespace std;
-
-Block::Block(Texture2D image, Texture2D selectedImage) {
-    // Stands for image Texture
-    this->imaget = image;
-    this->selectedImage = selectedImage;
-    this->hitSound = Assets.hit;
-    this->break1 = Assets.break1;
-    this->break2 = Assets.break2;
-}
 
 void Block::collide(float& camx, float& camy, int WIDTH, int HEIGHT) {
     if (mined == true) return;
@@ -68,6 +60,11 @@ void Block::draw() {
             infhit1 = false;
             infhit2 = false;
         }
+        stringstream ss;
+        ss << name << " " << health << "/" << ogHealth;
+        DrawOutlinedText(Assets.comicSans, ss.str().c_str(), x + camera.x - imaget.width/2, y + camera.y - 20, 20, WHITE, 1, BLACK);
+        ss.clear();
+        ss.str(" ");
     } else if (mined == false) {
         DrawTexture(imaget, x + camera.x, y + camera.y, WHITE);
         if (health == 2) {
@@ -95,6 +92,7 @@ void Block::draw() {
 
 void Block::destroy() {
     cout << "destroying block" << endl;
+    onDestroy(this, name);
     // void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void;
     Hotbar.add(0, 1, 1);
 }

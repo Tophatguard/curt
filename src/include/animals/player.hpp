@@ -1,6 +1,7 @@
 #pragma once
 
 #include "raylib.h"
+#include "../items/menu.hpp"
 #include <vector>
 #include <sstream>
 using namespace std;
@@ -23,7 +24,7 @@ inline class Player {
         
 
     public:
-
+        
         void init();
 
         void Unload();
@@ -41,6 +42,7 @@ inline class Hotbar {
         Texture2D rockImage;
         Texture2D selectedImage;
         Font comic_sans;
+        menu Menu;
     public:
         void init(int newSize);
         int selectedSlot = 0;

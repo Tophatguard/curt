@@ -1,5 +1,7 @@
 #include "player.hpp"
 #include "../text/text.hpp"
+#include "../items/menu.hpp"
+#include "../global/assets.hpp"
 #include <iostream>
 using namespace std;
 
@@ -59,6 +61,9 @@ void Player::init() {
 
 // Hotbar functions
 void Hotbar::init(int newSize) {
+    Menu.visible = false;
+    Menu.init(GetMouseX(), GetMouseY(), 70, 100, Assets.cornerTexture, Assets.sideTexture, Assets.sideYTexture, Assets.centerTexture, "Rock", "man...\nI don't know\nwhat this is...");
+    Menus.add(Menu);
     size = newSize;
     items.resize(size, std::vector<int>(2, 0));
     image = LoadTexture("images/global/slot/slot.png");
@@ -71,12 +76,22 @@ void Hotbar::draw() {
     for (int i = 0; i < size; i++) {
         DrawTexture(image, image.width * i, 0, WHITE);
         if (getItemIDInSlot(i) == 1) {
-            cout << "drawing rock in slot " << i << endl;
             DrawTexture(rockImage, image.width * i, 0, WHITE);
             ss << getItemAmount(i);
             DrawOutlinedText(comic_sans, ss.str().c_str(), image.width * i, 0, 20, WHITE, 1, BLACK);
             ss.str(" ");
             ss.clear();
+            if (CheckCollisionPointRec(GetMousePosition(), {image.width * i, 0, image.width, image.height})) {
+                Menu.visible = true;
+                Menu.x = GetMouseX();
+                Menu.y = GetMouseY();
+                Menus.menus.pop_back();
+                Menus.add(Menu);
+            } else {
+                Menu.visible = false;
+                Menus.menus.pop_back();
+                Menus.add(Menu);
+            }
         }
     }
     DrawTexture(selectedImage, selectedImage.width * selectedSlot, 0, WHITE);
@@ -94,7 +109,6 @@ void Hotbar::draw() {
         }
     }
     if (getItemIDInSlot(selectedSlot) == 1) {
-        TraceLog(LOG_INFO, "Drawing ze rock");
         // errerrrrerer i'm sans the skeleton
         DrawOutlinedText(comic_sans, "Rock", 5, 32, 20, WHITE, 1, BLACK);
     }

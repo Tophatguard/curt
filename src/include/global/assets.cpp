@@ -20,4 +20,15 @@ void Assets::loadAssets() {
     // sounds
     hit = LoadSound("sounds/hit.mp3");
 
+    cornerTexture = LoadTexture("images/global/menu/corner.png");
+    sideTexture = LoadTexture("images/global/menu/side.png");
+    sideYTexture = LoadTexture("images/global/menu/sideY.png");
+    centerTexture = LoadTexture("images/global/menu/center.png");
+
+    comicSans = LoadFont("fonts/Comic Sans MS.ttf");
+
+    debug = LoadTexture("images/global/debug/debug.png");
+
+    uranium = LoadTexture("images/world/uranium/uranium.png");
+    uraniumSelected = LoadTexture("images/world/uranium/uranium-selected.png");
 }

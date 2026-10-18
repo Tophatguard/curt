@@ -14,5 +14,18 @@ inline struct Assets {
     Music Unknown;
 
     Sound hit;
+
+    Texture2D cornerTexture;
+    Texture2D sideTexture;
+    Texture2D sideYTexture;
+    Texture2D centerTexture;
+    
+    Font comicSans;
+
+    Texture2D debug;
+
+    Texture2D uranium;
+    Texture2D uraniumSelected;
+
     void loadAssets();
 } Assets;
