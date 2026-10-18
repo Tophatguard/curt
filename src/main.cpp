@@ -8,6 +8,7 @@
 #include "include/items/menu.hpp"
 #include "include/objects/sprite.hpp"
 #include "include/items/menu.hpp"
+#include "include/text/text.hpp"
 #include <cstdlib>
 #include <ctime>
 #include <sstream>
@@ -82,6 +83,7 @@ int main() {
             Sprites.draw();
             Hotbar.draw();
             Menus.DrawAll();
+            DrawOutlinedText(Assets.comicSans, "VERSION 0.0.1\nSpecial Thanks:\nRubypup.", 0, Window.HEIGHT - 50, 15, WHITE, 1, BLACK);
             DrawTexture(Cursor, GetMouseX(), GetMouseY(), WHITE);
             ClearBackground(GREEN);
             EndDrawing();
